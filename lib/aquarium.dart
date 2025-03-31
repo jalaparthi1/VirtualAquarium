@@ -72,7 +72,9 @@ class _AquariumScreenState extends State<AquariumScreen>
   void _addFish() {
     if (fishList.length < 10) {
       setState(() {
-        fishList.add(Fish(color: selectedColor, speed: selectedSpeed));
+        Fish newFish = Fish(color: selectedColor, speed: selectedSpeed);
+        newFish.grow(); // Apply scaling effect
+        fishList.add(newFish);
         _saveSettings(); // Save settings when adding a fish
       });
     }
@@ -82,7 +84,7 @@ class _AquariumScreenState extends State<AquariumScreen>
   void _updateFishPositions() {
     setState(() {
       for (var fish in fishList) {
-        fish.moveFish(); // Move fish
+        fish.moveFish(300, 300); // Aquarium size of 300x300
       }
       if (collisionEffectEnabled) {
         _checkAllCollisions(); // Check for collisions if enabled
@@ -250,7 +252,7 @@ class _AquariumScreenState extends State<AquariumScreen>
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    'Joshika Alparthi\nPanther ID: 002828256',
+                    'Joshika Alaparthi\nPanther ID: 002828256',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
